@@ -1,0 +1,22 @@
+.tableContainer {
+    margin-top: 20px;
+  }
+  
+  .pillContainer {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .pillContainer button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #f4f4f4;
+    cursor: pointer;
+  }
+  
+  .pillContainer button.active {
+    background-color: #0070f3;
+    color: white;
+  }
+  
