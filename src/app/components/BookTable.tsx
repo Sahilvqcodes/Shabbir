@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Book } from '../types';
 import axios from 'axios';
 import Styles from '../styles/Table.module.scss';
-import '../styles/all.css';
 import { ChakraProvider, useToast } from '@chakra-ui/react';
 
 
