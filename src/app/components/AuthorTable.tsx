@@ -242,14 +242,14 @@ const AuthorTable: React.FC = () => {
             <div className="row">
             <div className="col">
                 <label>Name:<span className={Styles.required}>*</span></label><br />
-                <input type="text" name='name' className='form-control' value={inputValue.name} onChange={handleChange} /><br />
+                <input type="text" name='name' className='form-control' value={inputValue.name} onChange={handleChange} />
                 <div className={Styles.error}>
                     <p>{error.name}</p>
                 </div>
                 </div>
                 <div className="col">
                 <label>Biography:<span className={Styles.required}>*</span></label><br />
-                <input type="text" name="biography" className='form-control' value={inputValue.biography} onChange={handleChange} /><br />
+                <input type="text" name="biography" className='form-control' value={inputValue.biography} onChange={handleChange} />
                 <div className={Styles.error}>
                     <p>{error.biography}</p>
                 </div>
@@ -259,14 +259,14 @@ const AuthorTable: React.FC = () => {
                 <div className='row'>
                   <div className='col'>
                 <label>Date of Bith:<span className={Styles.required}>*</span></label><br />
-                <input type="date" name="dob" className='form-control' value={inputValue.dob} onChange={handleChange} /><br />
+                <input type="date" name="dob" className='form-control' value={inputValue.dob} onChange={handleChange} />
                 <div className={Styles.error}>
                     <p>{error.dob}</p>
                 </div>
                 </div>
                 <div className='col'>
                 <label>Number of Books Published:<span className={Styles.required}>*</span></label><br />
-                <input type="number" name="booksPublished" className='form-control' value={inputValue.booksPublished} onChange={handleChange} /><br />
+                <input type="number" name="booksPublished" className='form-control' value={inputValue.booksPublished} onChange={handleChange} />
                 <div className={Styles.error}>
                     <p>{error.booksPublished}</p>
                 </div>
