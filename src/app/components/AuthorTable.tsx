@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Author } from '../types';
 import axios from 'axios';
 import '../styles/all.css';
+import Styles from '../styles/Table.module.scss';
+import { ChakraProvider ,useToast} from '@chakra-ui/react';
 
 const AuthorTable: React.FC = () => {
+
+  const toast = useToast()
   const [authors, setAuthors] = useState<Author[]>([]);
   const [currentAuthor, setCurrentAuthor] = useState('show');
     const [inputValue, setInputValue] = useState({
@@ -20,7 +24,9 @@ const AuthorTable: React.FC = () => {
       booksPublished: ""
   });
   const [editData, setEditData] = useState<Author | null>(null);
-
+  const [deleteAuthor, setDeleteAuthor] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
 
   useEffect(() => {
@@ -61,7 +67,6 @@ const AuthorTable: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("inputvalue>>>", inputValue)
         let error = false
         if(inputValue.name ==''){
           setError((prev)=>({...prev,name:"Name is required *"}))
@@ -87,9 +92,23 @@ const AuthorTable: React.FC = () => {
         try {
             const result = await axios.post('/api/author/auth', object)
             console.log("result>>", result)
+            toast({
+              position:'top-right',
+              title: "Author added successfully!",
+              status: "success",
+              duration: 2000,
+                })
+          
 
         } catch (error) {
             console.log("error>>>", error)
+            toast({
+              position:'top-right',
+              title: "Something went wrong!",
+              status: "error",
+              duration: 2000,
+                })
+          
         }
       }
     }
@@ -108,7 +127,7 @@ const AuthorTable: React.FC = () => {
 
     useEffect(() => {
       getAuthorData()
-    }, [editData]);
+    }, [editData,currentAuthor,deleteAuthor]);
 
 
 
@@ -116,8 +135,22 @@ const AuthorTable: React.FC = () => {
     try {
         const result = await axios.delete(`/api/author/${id}`)
         console.log("result>>>",result)
+        toast({
+          position:'top-right',
+          title: "Author delete successfully!",
+          status: "success",
+          duration: 2000,
+            })
+            setDeleteAuthor(true)
     } catch (error) {
         console.log("error>>>",error)
+        toast({
+          position:'top-right',
+          title: "Something went wrong!",
+          status: "error",
+          duration: 2000,
+            })
+            setDeleteAuthor(false)
     }
 
    }
@@ -153,12 +186,24 @@ const AuthorTable: React.FC = () => {
         }
 
         try {
-            const result = await axios.put(`/api/books/${editData?._id}`, object)
+            const result = await axios.put(`/api/author/${editData?._id}`, object)
             console.log("result>>", result)
             setEditData(null)
             setCurrentAuthor('show')
+            toast({
+              position:'top-right',
+              title: "Author Update successfully!",
+              status: "success",
+              duration: 2000,
+                })
         } catch (error) {
             console.log("error>>>", error)
+            toast({
+              position:'top-right',
+              title: "Something went wrong!",
+              status: "error",
+              duration: 2000,
+                })
         }
     }
    }
@@ -169,77 +214,114 @@ const AuthorTable: React.FC = () => {
    }
 
 
+   const startIndex = (currentPage - 1) * itemsPerPage;
+   const endIndex = startIndex + itemsPerPage;
+   const paginatedBooks = authors.slice(startIndex, endIndex)
+   
+ 
+    const totalPages = Math.ceil(authors.length / itemsPerPage);
+
+ 
+    const handlePageChange = (pageNumber :any) => {
+      setCurrentPage(pageNumber);
+    };
 
 
 
   return (
-    <div>
+    <div className={Styles.inside_container}>
+      <ChakraProvider/>
+      <div className={Styles.book_inside}>
       <h2>Authors</h2>
-      <div className='book-section'>
-                <ul>
-                    <li className={`list_value ${currentAuthor == 'add' ? 'active' : ""}`} onClick={() => showAuthor('add')}>Add Book</li>
-                    <li className={`list_value ${currentAuthor == 'show' ? 'active' : ""}`} onClick={() => showAuthor('show')}>Show Books</li>
-                </ul>
+      <div className={Styles.book_section}>
+                    <button className={`list_value ${currentAuthor == 'add' ? Styles.active : ""}`} onClick={() => showAuthor('add')}>{editData ? "Edit author" : "Add Author"}</button>
+                    <button className={`list_value ${currentAuthor == 'show' ? Styles.active : ""}`} onClick={() => showAuthor('show')}>Show Author</button>               
             </div>
-            {currentAuthor == 'add' ? <form >
-                <label>Name:</label><br />
-                <input type="text" name='name' value={inputValue.name} onChange={handleChange} /><br />
-                <div className='error'>
+            {currentAuthor == 'add' ? 
+                            <div className={Styles.layout_inside}>
+           <form >
+            <div className="row">
+            <div className="col">
+                <label>Name:<span className={Styles.required}>*</span></label><br />
+                <input type="text" name='name' className='form-control' value={inputValue.name} onChange={handleChange} /><br />
+                <div className={Styles.error}>
                     <p>{error.name}</p>
                 </div>
-                <label>Biography:</label><br />
-                <input type="text" name="biography" value={inputValue.biography} onChange={handleChange} /><br />
-                <div className='error'>
+                </div>
+                <div className="col">
+                <label>Biography:<span className={Styles.required}>*</span></label><br />
+                <input type="text" name="biography" className='form-control' value={inputValue.biography} onChange={handleChange} /><br />
+                <div className={Styles.error}>
                     <p>{error.biography}</p>
                 </div>
-                <label>Date of Bith:</label><br />
-                <input type="date" name="dob" value={inputValue.dob} onChange={handleChange} /><br />
-                <div className='error'>
+                </div>
+                </div>
+
+                <div className='row'>
+                  <div className='col'>
+                <label>Date of Bith:<span className={Styles.required}>*</span></label><br />
+                <input type="date" name="dob" className='form-control' value={inputValue.dob} onChange={handleChange} /><br />
+                <div className={Styles.error}>
                     <p>{error.dob}</p>
                 </div>
-                <label>Number of Books Published:</label><br />
-                <input type="number" name="booksPublished" value={inputValue.booksPublished} onChange={handleChange} /><br />
-                <div className='error'>
+                </div>
+                <div className='col'>
+                <label>Number of Books Published:<span className={Styles.required}>*</span></label><br />
+                <input type="number" name="booksPublished" className='form-control' value={inputValue.booksPublished} onChange={handleChange} /><br />
+                <div className={Styles.error}>
                     <p>{error.booksPublished}</p>
                 </div>
+                </div>
+                </div>
                 <br />
-                {!editData ?<button type='submit' onClick={handleSubmit}>Add Author</button>
+                {!editData ?<button type='submit'className={Styles.sub_btn} onClick={handleSubmit}>Add Author</button>
                   : 
                   <>
-                  <button type='submit' onClick={handlecancel}>Cancel</button>
-                  <button type='submit' onClick={handleUpdate}>Update Author</button>
+                  <button type='submit' className={Styles.cancel_btn} onClick={handlecancel}>Cancel</button>
+                  <button type='submit' style={{marginLeft:'10px'}} className={Styles.sub_btn} onClick={handleUpdate}>Update Author</button>
                   </>
                   }
             </form>
+            </div>
                 :
                 currentAuthor == 'show' ?
-                    <table>
-                        <thead>
+                <>
+                 <div className={Styles.layout_inside}>
+                    <table className="table">
+                        <thead className="thead-dark">
                             <tr>
-                                <th>Name</th>
-                                <th>Biography</th>
-                                <th>Date of Birth</th>
-                                <th>Number of Books Published</th>
-                                <th>Actions</th>
+                                <th className='scope'>Name</th>
+                                <th className='scope'>Biography</th>
+                                <th className='scope'>Date of Birth</th>
+                                <th className='scope'>Books Published</th>
+                                <th className='scope'>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {authors.map((author) => (
+                            {paginatedBooks.map((author) => (
                                 <tr key={author._id}>
                                     <td>{author.name}</td>
                                     <td>{author.biography}</td>
                                     <td>{new Date(author.dateOfBirth).toLocaleDateString()}</td>
                                     <td>{author.numberOfBooksPublished}</td>
-                                    <td>
-                                        <button onClick={()=>handleEdit(author)}>Edit</button>
-                                        <button onClick={()=>handleDeleteAuthor(author._id)}>Delete</button>
+                                    <td className={Styles.action_btn}>
+                                        <button className={Styles.info_btn} onClick={()=>handleEdit(author)}>Edit</button>
+                                        <button className={Styles.delete_btn}  style={{marginLeft:'10px'}} onClick={()=>handleDeleteAuthor(author._id)}>Delete</button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+                    <div className={Styles.pagination_button}>
+                        <button className="bg-black text-white previous btn" disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}> Previous</button>
+                        <span>Page {currentPage} of {totalPages}</span>
+                        <button className="bg-gray-300 text-gray-700 btn next" disabled={currentPage === totalPages} onClick={() => handlePageChange(currentPage + 1)}>Next</button>
+                      </div> 
+                      </div>
+                    </>
                     : ""
             }
+            </div>
     </div>
   );
 };

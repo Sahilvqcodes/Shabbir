@@ -9,7 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@chakra-ui/toast": "^7.0.2",
+    "@nextui-org/tabs": "^2.0.32",
     "axios": "^1.7.2",
+    "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
     "mongoose": "^8.4.4",
     "next": "14.2.4",

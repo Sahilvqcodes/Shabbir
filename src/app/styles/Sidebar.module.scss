@@ -1,21 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 .sidebar {
-    width: 200px;
-    background-color: #f4f4f4;
-    padding: 20px;
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-  
-  .sidebar li.active {
-    font-weight: bold;
-    background-color: #e0e0e0;
-  }
-  
+  left: 0;
+  top: 0;
+  bottom: 0;
+  position: fixed;
+  width: 260px;
+  background-color: #006666;
+  padding: 20px;
+  height: 100vh;
+  font-family: "Montserrat", sans-serif;
+}
+
+.right_content {
+  padding-left: 260px;
+}
+
+.logo_box {
+  border-bottom: 1px solid #338585;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+}
+
+.side_container {
+  background: #f5f5f5;
+  padding: 30px;
+}
+
+.right_container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid #e6e9eb;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu_links ul {
+  margin: 0;
+}
+
+.menu_links li {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  width: 100%;
+  position: relative;
+}
+
+.menu_link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.menu_links_inner ul.submenu li {
+  padding: 8px 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu_links li.active_menu .menu_link {
+  background: #338585;
+}
+.active_table:hover{
+  background: #338585;
+}
+
+.menu_links svg {
+  rotate: -90deg;
+}
+
+.menu_links li.active_menu svg {
+  rotate: 180deg;
+}
+
+.menu_links {
+  border-bottom: 1px solid #338585;
+  padding-bottom: 25px;
+}
+
+.menu_links h3 {
+  margin: 0 0 30px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.menu_links li ul {
+  padding-left: 30px;
+
+}
+
+.menu_links li ul li {
+  padding: 5px 0;
+  font-size: 15px;
+}
+
+.menu_links li ul li:last-child {
+  border: none;
+}
+
+.sidebar li.active {
+  font-weight: bold;
+  background-color: #e0e0e0;
+}
+
+.side_container {
+  width: 100%;
+  display: flex;
+}
+
+.right_content {
+  width: 100%;
+}
+
+.right_container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1024px;
+}

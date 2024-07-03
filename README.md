@@ -20,6 +20,12 @@ pnpm dev
 # or
 bun dev
 ```
+## Getting server:-
+
+- Fisrt need to install mongodb in the sytstem.
+- Install mongodb compass to access the database.
+
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

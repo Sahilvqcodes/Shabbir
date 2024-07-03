@@ -7,9 +7,6 @@ const TablePage: React.FC = () => {
   return (
     <div className={styles.container}>
       <Sidebar />
-      <div className={styles.content}>
-        <Table />
-      </div>
     </div>
   );
 };

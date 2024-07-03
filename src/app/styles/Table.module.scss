@@ -1,22 +1,113 @@
-.tableContainer {
-    margin-top: 20px;
-  }
-  
+ 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+.book_section{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+ 
+.tab_btns{
+  border-bottom: 1px solid #7e7b7b;
+}
+.required {
+  color: #c90d0d;
+}
+.heading h3{
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+.book_inside  .book_section{
+  margin-bottom: 0;
+}
+.book_inside .layout_inside{
+  padding: 30px;
+  background: #fff;
+  border-radius: 0 0 10px 10px;}
+
+.layout_inside .delete_btn {
+    background:#e17171;
+    border: 1px #e17171;
+    color: #fff;
+    padding: 4px 14px;
+    font-size: 15px;
+    border-radius: 5px;
+}
+.layout_inside table .info_btn{  padding: 4px 14px;}
+.layout_inside .info_btn,.sub_btn {
+  background: rgb(0, 102, 102);
+  border: 1px solid rgb(0, 102, 102);
+  color: #fff;
+  padding: 8px 14px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+.layout_inside .cancel_btn {
+  background: #ef7474;
+  border: 1px solid #ef7474;
+  color: #fff;
+  padding: 8px 14px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+
+.layout_inside  form label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.error p{
+  color: rgb(123, 2, 2);
+}
+td.action_btn button.btn.btn-danger {
+  margin-left: 15px;
+}
+.pagination_button {
+  display: flex;
+  justify-content: space-between;
+}
   .pillContainer {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+    border-bottom: 1px solid #cbcbd3;
+    font-family: "Montserrat", sans-serif;
   }
-  
-  .pillContainer button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #f4f4f4;
-    cursor: pointer;
+  .pillContainer button ,.book_section button{
+    background: transparent !important;
+    padding: 3px 20px;
+    position: relative;
+    border-radius: 0;
+    color: #8a909c !important;
+    position: relative;
+    font-family: "Montserrat", sans-serif;
+}
+  .pillContainer button.active::after,.book_section button.active::after{
+   content: "";
+   position: absolute;
+   left: 0;
+   right: 0;
+   background:#006666;
+   height: 2px;
+   bottom: 0;
+
   }
-  
-  .pillContainer button.active {
-    background-color: #0070f3;
-    color: white;
+  .inside_container{
+    padding: 15px 0;
+    font-family: "Montserrat", sans-serif;
   }
-  
+  .inside_container h2{
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .book_inside{
+    padding: 25px 30px;
+    background: #f7f7f7;
+    border-radius: 10px;
+  }
+
+  .right_container{
+    padding: 15px;
+  }

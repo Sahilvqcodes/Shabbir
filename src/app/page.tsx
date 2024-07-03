@@ -6,10 +6,6 @@ export default function Home() {
   return (
     <div className={styles.container}>
     <Sidebar />
-    <div className={styles.content}>
-      <h1>Welcome to the CRUD App</h1>
-      <Table />
-    </div>
   </div>
   );
 }
